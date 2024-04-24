@@ -1,0 +1,46 @@
+{%extends 'core/layout.html'%}
+
+{%block title%}
+{{item.name}}
+{%endblock%}
+{%block content%}
+<div class="grid grid-cols-5 gap-6"> 
+    <div class="col-span-3">
+        <img src="{{item.image.url}}" class="rounded-xl">
+    </div>
+
+    <div class="col-span-2 p-6 ">
+        <h1 class="mb-6 text-3xl">{{item.name}}</h1>
+        <p class="text-gray-500"><strong>Preț: </strong>{{item.price}} lei</p>
+        <p class="text-gray-500"><strong>Vânzător: </strong>{{item.created_by.username}}</p>
+        {%if item.description %}
+        <p class="texxt-gray-700">
+            <strong class="text-gray-500">Descriere: </strong><br>
+            {{item.description}}</p>
+        {%endif%}
+
+        <a href="#" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-lime-700 text-white rounded-xl hover:bg-lime-950 ">Contactează Vânzătorul</a>
+    </div>
+</div>
+<div class="mt-6 px-6 py-12 ">
+    <h2 class="mb-12 text-2xl text-center">Lucruri care ți-ar putea plăcea</h2>
+
+    <div class="grid grid-cols-3 gap-3">
+        {%for item in related_items%}
+            <div>
+                <a href="{% url 'item:detail' item.id %}">
+                    <div>
+                        <img src="{{item.image.url}}"  class="rounded-t-xl w-full h-auto">
+                    </div>
+                    <div class="p-6 bg-white rounded-b-xl">
+                        <h2 class="text-2xl">{{item.name}}</h2>
+                        <p clas="text-gray-400">Price:{{item.price}} lei</p>
+                    </div>
+                </a>
+            </div>
+        
+        {%endfor%}
+    </div>
+
+</div>
+{%endblock%}
