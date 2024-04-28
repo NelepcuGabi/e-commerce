@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{%block title %}{%endblock%} | Vintaje</title>
+   
     
 </head>
 <body>
@@ -12,12 +13,21 @@
     <nav class="py-6 px-6 flex justify-between items-center border-b border-gray-300">
         <a href="/" class="text-xl font-semibold"> Vintaje</a>
         <div class="space-x-6">
-            <a href="#" class="text-lg font-semibold  hover:text-gray-700"> Obiect Nou</a>
+            <a href="{%url 'item:new'%}" class="text-lg font-semibold  hover:text-gray-700"> Obiect Nou</a>
             <a href="#" class="text-lg font-semibold hover:text-gray-700"> Căutare</a>
 
-            <a href="{% url 'core:signup'%}" class="px-6 py-3 text-lg font-semibold bg-lime-700 text-white rounded-xl hover:bg-lime-950">Înregistrare</a>
-            <a href="#" class="px-6 py-3 text-lg font-semibold bg-gray-600 text-white rounded-xl hover:bg-gray-900">LogIn</a>
+            {%if request.user.is_authenticated %}
+               
+                <a href="{%url 'dashboard:dashboard'%}" class="px-6 py-3 text-lg font-semibold bg-lime-700 text-white rounded-xl hover:bg-lime-950">Dashboard</a>
+                <a href="#" class="px-6 py-3 text-lg font-semibold bg-gray-600 text-white rounded-xl hover:bg-gray-900">Inbox</a>
+                <a href="{% url 'core:logout'%}" class="px-7 py-3 text-lg font-semibold bg-red-600 text-white rounded-xl hover:bg-red-900">LogOut</a>
+            {% else %}
+                <a href="{% url 'core:signup'%}" class="px-6 py-3 text-lg font-semibold bg-lime-700 text-white rounded-xl hover:bg-lime-950">Înregistrare</a>
+                <a href="{% url 'core:login'%}" class="px-6 py-3 text-lg font-semibold bg-gray-600 text-white rounded-xl hover:bg-gray-900">LogIn</a>
+                
+            {%endif%}
         </div>
+       
     </nav>
     <div class="px-6 py-6"> 
        {% block content %}
@@ -27,7 +37,9 @@
     <footer class="py-6 px-6 flex justify-between bg-gray-800">
         <div class="w-2/3 pr-10">
             <h3 class="mb-5 font-semibold text-gray-400">Despre noi</h3>
-            <p class="text-lg text-gray-500 ">bla bla bla bla</p>
+            <p class="text-lg text-gray-500 ">Bine v-am găsit! Vintaje este  o platformă prin care oamenii pot să își vândă lucrurile de care nu mai au nevoie
+                și să le găsească un cămin nou. Vino și tu în comunitatea noastră și ajută-i pe alții să găsească lucruri de care nici ei nu știu că au nevoie!
+            </p>
         </div>
         <div class="w-1/3">
             <h3 class="mb-5 font-semibold text-gray-400">Meniu</h3>
@@ -46,7 +58,7 @@
 
 
 
-
+    
     <script src="https://cdn.tailwindcss.com"></script>
 </body>
 </html>

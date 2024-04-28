@@ -18,8 +18,18 @@
             <strong class="text-gray-500">Descriere: </strong><br>
             {{item.description}}</p>
         {%endif%}
+            {%if request.usrr == item.create_by%}
 
+            <div class="mt-6 p-6 bg-white rounded-xl">
+                <p>Acesta este obiectul tau</p>
+                <a href="{%url 'item:delete' item.id%}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold  bg-lime-700 text-white rounded-xl hover:bg-lime-950 ">Edit</a>
+                <a href="{%url 'item:delete' item.id%}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold  bg-red-700 text-white rounded-xl hover:bg-red-950 ">Delete</a>
+            </div>
+            {%else%}
+            
         <a href="#" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-lime-700 text-white rounded-xl hover:bg-lime-950 ">Contactează Vânzătorul</a>
+            {%endif%}
+    
     </div>
 </div>
 <div class="mt-6 px-6 py-12 ">
@@ -35,6 +45,7 @@
                     <div class="p-6 bg-white rounded-b-xl">
                         <h2 class="text-2xl">{{item.name}}</h2>
                         <p clas="text-gray-400">Price:{{item.price}} lei</p>
+
                     </div>
                 </a>
             </div>
